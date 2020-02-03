@@ -1,6 +1,6 @@
 let express = require("express");
 let router = express.Router();
-let cd = require("../../mongodb/contact");
+let cd = require("../../mongodb/Contact");
 
 router.post("/contactus", async (req, res) => {
   let { error } = cd.contactvalidation(req.body);

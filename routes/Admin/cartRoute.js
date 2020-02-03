@@ -1,6 +1,6 @@
 let express = require("express");
 let router = express.Router();
-let cm = require("../../mongodb/usercart");
+let cm = require("../../mongodb/UserCart");
 let prom = require("../../mongodb/Product");
 let urm = require("../../mongodb/UserRegistration");
 let auth = require("../../middleware/authorization");

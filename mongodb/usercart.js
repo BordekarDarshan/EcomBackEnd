@@ -1,6 +1,6 @@
 let mongoose = require("mongoose");
-let pm = require("../mongodb/Product");
-let rm = require("../mongodb/UserRegistration");
+let pm = require("./Product");
+let rm = require("./UserRegistration");
 
 let cartschema = new mongoose.Schema({
   productid: { type: String },

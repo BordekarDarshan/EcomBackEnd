@@ -4,16 +4,16 @@ const morgan = require("morgan");
 const config = require("config");
 const mongoose = require("mongoose");
 const port = process.env.PORT || 4000;
-const contact = require("./routes/ContactRoute");
-const userregi = require("./routes/RegistrationRoute");
-const rights = require("./routes/AdminRightsRoute");
+const contact = require("./routes/User/ContactRoute");
+const userregi = require("./routes/User/RegistrationRoute");
+const rights = require("./routes/Admin/AdminRightsRoute");
 const login = require("./auth/login");
-const mailer = require("./routes/Nodemailer");
-const reset = require("./routes/resetpass");
-const category = require("./routes/ProductCRUD");
-const cart = require("./routes/cartRoute");
-const fileUpload = require("./routes/FileUploadRoute");
-const productOperation = require("./routes/ProductRoute");
+const mailer = require("./routes/User/Nodemailer");
+const reset = require("./routes/Admin/ResetPass");
+const category = require("./routes/Admin/ProductCRUD");
+const cart = require("./routes/Admin/CartRoute");
+const fileUpload = require("./routes/User/FileUploadRoute");
+const productOperation = require("./routes/Admin/ProductRoute");
 
 //First Ask for Private Key
 if (!config.get("jwtprivatekey")) {
