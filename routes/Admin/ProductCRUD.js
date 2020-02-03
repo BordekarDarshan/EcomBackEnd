@@ -153,3 +153,5 @@ router.delete("/deleteproduct/:pid", async (req, res) => {
   }
   res.send({ message: "Deleted" });
 });
+
+module.exports = router;

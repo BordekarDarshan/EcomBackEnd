@@ -15,3 +15,5 @@ let product = require("../../mongodb/Product");
 router.get("/latestproduct", async (req, res) => {
   let totaldatacount = await prom.productModel;
 });
+
+module.exports = router;
