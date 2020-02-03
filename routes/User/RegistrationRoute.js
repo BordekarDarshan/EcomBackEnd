@@ -1,9 +1,9 @@
 let express = require("express");
 let bcrypt = require("bcryptjs");
-let urm = require("../mongodb/UserRegistration");
+let urm = require("../../mongodb/UserRegistration");
 let router = express.Router();
-let auth = require("../middleware/authorization");
-let admin = require("../middleware/admin");
+let auth = require("../../middleware/authorization");
+let admin = require("../../middleware/admin");
 
 router.post("/newuser", async (req, res) => {
   let { error } = urm.uRegisvalidation(req.body);

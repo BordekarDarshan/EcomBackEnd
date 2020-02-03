@@ -1,7 +1,7 @@
 let express = require("express");
-let urm = require("../mongodb/UserRegistration");
-let auth = require("../middleware/authorization");
-let admin = require("../middleware/admin");
+let urm = require("../../mongodb/UserRegistration");
+let auth = require("../../middleware/authorization");
+let admin = require("../../middleware/admin");
 let router = express.Router();
 
 router.delete("/removeu/:id", [auth, admin], async (req, res) => {
@@ -11,5 +11,11 @@ router.delete("/removeu/:id", [auth, admin], async (req, res) => {
   }
   res.send({ message: "removed" });
 });
+
+// Add Product
+
+// Update Product
+
+// Delete Product
 
 module.exports = router;

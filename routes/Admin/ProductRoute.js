@@ -1,7 +1,7 @@
 let express = require("express");
 let router = express.Router();
-let cm = require("../mongodb/usercart");
-let prom = require("../mongodb/Product");
+let cm = require("../../mongodb/usercart");
+let prom = require("../../mongodb/Product");
 
 router.post("/checkofferproducts", async (req, res) => {
   let offerproduct = await prom.productModel.findOne({
@@ -11,25 +11,6 @@ router.post("/checkofferproducts", async (req, res) => {
     res.status(402).send("No Offer Products");
   }
   res.send({ Data: offerproduct });
-});
-
-router.get("/latestproduct/:page", async (req, res) => {
-  let perpage = 2;
-  let getpage = req.params.page;
-  let latestProduct = await prom.productModel
-    .find()
-    .sort("-recordDate")
-    .skip(perpage * getpage - perpage)
-    .limit(perpage);
-  let totaldatacount = await prom.productModel.find({}).countDocuments();
-  let totalpage = Math.ceil(totaldatacount / perpage);
-  res.send({
-    PerPage_Records: perpage,
-    Page_No: getpage,
-    Data: latestProduct,
-    TotolCountData: totaldatacount,
-    TotalPages: totalpage
-  });
 });
 
 //Cart For Offer Products

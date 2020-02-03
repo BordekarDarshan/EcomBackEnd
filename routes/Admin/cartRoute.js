@@ -1,9 +1,9 @@
 let express = require("express");
 let router = express.Router();
-let cm = require("../mongodb/usercart");
-let prom = require("../mongodb/Product");
-let urm = require("../mongodb/UserRegistration");
-let auth = require("../middleware/authorization");
+let cm = require("../../mongodb/usercart");
+let prom = require("../../mongodb/Product");
+let urm = require("../../mongodb/UserRegistration");
+let auth = require("../../middleware/authorization");
 
 //Cart for Products with OG Price
 router.post("/cart", async (req, res) => {

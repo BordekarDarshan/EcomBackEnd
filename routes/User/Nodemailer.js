@@ -1,4 +1,4 @@
-let urm = require("../mongodb/UserRegistration");
+let urm = require("../../mongodb/UserRegistration");
 let nodemailer = require("nodemailer");
 let express = require("express");
 let router = express.Router();

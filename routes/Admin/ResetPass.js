@@ -1,6 +1,6 @@
 let express = require("express");
 let router = express.Router();
-let urm = require("../mongodb/UserRegistration");
+let urm = require("../../mongodb/UserRegistration");
 let bcrypt = require("bcryptjs");
 let Joi = require("@hapi/joi");
 
@@ -38,7 +38,9 @@ router.post("/:token", async (req, res) => {
 function validation(msg) {
   let schema = Joi.object().keys({
     userlogin: {
-      password: Joi.string().required().min(3)
+      password: Joi.string()
+        .required()
+        .min(3)
     }
   });
   return Joi.validate(msg, schema);

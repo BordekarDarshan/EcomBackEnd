@@ -5,16 +5,16 @@ let Joi = require("@hapi/joi");
 
 let productSchema = new mongoose.Schema({
   pName: { type: String, minlength: 2, maxlength: 30 },
-  price: { type: Number, minlength: 1 },
+  price: { type: Number, minlength: 1, required: true },
   category: { type: String },
   subcategory: { type: String },
   recordDate: { type: Date },
   updateDate: { type: Date },
-  // isadmin: { type: Boolean },
-  // image: { type: String, required: true },
-  // description: { type: String, required: true, minlength: 2, maxlength: 50 },
+  isadmin: { type: Boolean },
+  //image: { type: String, required: true },
+  description: { type: String, required: true, minlength: 2, maxlength: 50 },
   offerPrice: { type: Number },
-  // isAvailable: { type: Boolean, required: true },
+  isAvailable: { type: Boolean, required: true },
   isTodayOffer: { type: Boolean }
 });
 
@@ -49,10 +49,21 @@ let fileModel = mongoose.model("file", fileSchema);
 
 function uProductValidation(reqbody) {
   let schema = Joi.object().keys({
-    pName: Joi.string().min(2).max(40).required(),
-    price: Joi.number().min(1).required(),
-    category: Joi.string().min(2).max(40).required(),
-    subcategory: Joi.string().min(2).max(40).required(),
+    pName: Joi.string()
+      .min(2)
+      .max(40)
+      .required(),
+    price: Joi.number()
+      .min(1)
+      .required(),
+    category: Joi.string()
+      .min(2)
+      .max(40)
+      .required(),
+    subcategory: Joi.string()
+      .min(2)
+      .max(40)
+      .required(),
     offerPrice: Joi.number().required(),
     isTodayOffer: Joi.boolean().required()
   });
@@ -60,15 +71,24 @@ function uProductValidation(reqbody) {
 }
 function uSubcatValidation(reqbody) {
   let schema = Joi.object().keys({
-    subcategory: Joi.string().min(2).max(40).required(),
-    category: Joi.string().min(2).max(40).required()
+    subcategory: Joi.string()
+      .min(2)
+      .max(40)
+      .required(),
+    category: Joi.string()
+      .min(2)
+      .max(40)
+      .required()
   });
   return Joi.validate(reqbody, schema);
 }
 
 function uCatValidation(reqbody) {
   let schema = Joi.object().keys({
-    category: Joi.string().min(2).max(40).required()
+    category: Joi.string()
+      .min(2)
+      .max(40)
+      .required()
   });
   return Joi.validate(reqbody, schema);
 }

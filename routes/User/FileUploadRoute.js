@@ -1,6 +1,6 @@
 let express = require("express");
 let router = express.Router();
-let fm = require("../mongodb/Product");
+let fm = require("../../mongodb/Product");
 let multer = require("multer");
 
 let imgport = "http://localhost:4000";
