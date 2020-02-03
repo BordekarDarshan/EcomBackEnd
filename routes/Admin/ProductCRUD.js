@@ -124,10 +124,12 @@ router.post("/product", async (req, res) => {
     category: req.body.category,
     subcategory: req.body.subcategory,
     recordDate: Date.now(),
-    isTodayOffer: req.body.isTodayOffer
+    isTodayOffer: req.body.isTodayOffer,
+    isAvailable: req.body.isAvailable,
+    description: req.body.description
   });
   let productsave = await product.save();
-  res.send({ Message: "Saved" });
+  res.send({ Message: "Saved", Data: productsave });
 });
 
 //Update Product.

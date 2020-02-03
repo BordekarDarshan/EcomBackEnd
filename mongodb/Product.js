@@ -65,7 +65,9 @@ function uProductValidation(reqbody) {
       .max(40)
       .required(),
     offerPrice: Joi.number().required(),
-    isTodayOffer: Joi.boolean().required()
+    isTodayOffer: Joi.boolean().required(),
+    isAvailable: Joi.boolean().required(),
+    description: Joi.string().required()
   });
   return Joi.validate(reqbody, schema);
 }
