@@ -125,6 +125,7 @@ router.post("/product", async (req, res) => {
     subcategory: req.body.subcategory,
     recordDate: Date.now(),
     isTodayOffer: req.body.isTodayOffer,
+    offerPrice: req.body.offerPrice,
     isAvailable: req.body.isAvailable,
     description: req.body.description
   });
