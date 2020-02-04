@@ -4,20 +4,29 @@ let Joi = require("@hapi/joi");
 let product = require("../../mongodb/Product");
 
 // Fetch Product By Category. [Electronics Clothing]
-router.get("/product/electronics", async (req, res) => {
-  let getData = await product.productModel.findOne({ category: "Electronics" });
+
+router.get("/category/:category", async (req, res) => {
+  let getData = await product.productModel.find({
+    category: req.params.category
+  });
 
   res.send({ Message: "Fetch Successfully", Data: getData });
   console.log(getData);
 });
 
-router.get("/product/Clothing", async (req, res) => {
-  let getData = await product.productModel.findOne({ category: "Clothing" });
-
-  res.send({ Message: "Fetch Successfully", Data: getData });
-});
-
 // Fetch Product By SubCategory. [Tv Mobile || T-Shirt Jeans]
+
+router.get("/category/:category/subcategory/:subcategory", async (req, res) => {
+  let getData = await product.productModel.find({
+    category: req.params.category,
+    subcategory: req.params.subcategory
+  });
+  if (!getData) {
+    return res.status(503).send({ Message: "Server Temporarily Available" });
+  }
+
+  res.send({ Message: "Data Fetch Successfully", Data: getData });
+});
 
 // Fetch all Products. [All Products]
 
