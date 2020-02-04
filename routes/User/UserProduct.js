@@ -1,6 +1,5 @@
 let express = require("express");
 let router = express.Router();
-let Joi = require("@hapi/joi");
 let product = require("../../mongodb/Product");
 
 // Fetch Product By Category. [Electronics Clothing]
