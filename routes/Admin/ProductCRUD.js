@@ -11,9 +11,12 @@ router.post("/subcat", async (req, res) => {
   if (error) {
     res.status(402).send(error.details[0].message);
   }
+  let addProductData = await pm.productModel
+    .find({ subcategory: req.body.subcategory })
+    .select(["pName", "price"]);
   let subCategory = await new pm.subcategoryModel({
     subcategory: req.body.subcategory,
-    category: req.body.category
+    product: addProductData
   });
   let subCategorySave = await subCategory.save();
   res.send({ Message: "Saved" });
@@ -64,7 +67,7 @@ router.post("/cat", async (req, res) => {
   }
   let subcat = await pm.subcategoryModel
     .find({ category: req.body.category })
-    .select(["subcategory", "category", "product"]);
+    .select(["subcategory", "product"]);
 
   let category = await new pm.categoryModel({
     category: req.body.category,
@@ -101,7 +104,7 @@ router.put("/ucatsubcategory/:id", async (req, res) => {
 
   let sub = await pm.subcategoryModel
     .find({ category: req.body.category })
-    .select(["subcategory", "category", "product"]);
+    .select(["subcategory", "product"]);
 
   ucat.subcategory = sub;
 
