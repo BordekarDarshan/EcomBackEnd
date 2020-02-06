@@ -6,7 +6,6 @@ let config = require("config");
 //Schema
 let uRegisSchema = new mongoose.Schema({
   firstname: { type: String },
-  lastname: { type: String },
   userlogin: {
     emailId: { type: String },
     password: { type: String }
@@ -33,11 +32,21 @@ let uRegisModel = mongoose.model("UserRegistration", uRegisSchema);
 //Validation
 function uRegisvalidation(reqbody) {
   let schema = joi.object().keys({
-    firstname: joi.string().min(3).max(20).required(),
-    lastname: joi.string().min(3).max(20).required(),
+    firstname: joi
+      .string()
+      .min(3)
+      .max(20)
+      .required(),
     userlogin: {
-      emailId: joi.string().required().email({ minDomainSegments: 2 }),
-      password: joi.string().required().min(3).max(20),
+      emailId: joi
+        .string()
+        .required()
+        .email({ minDomainSegments: 2 }),
+      password: joi
+        .string()
+        .required()
+        .min(3)
+        .max(20),
       confirmPass: joi
         .any()
         .valid(joi.ref("password"))

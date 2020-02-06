@@ -19,7 +19,6 @@ router.post("/newuser", async (req, res) => {
   }
   let newUser = await new urm.uRegisModel({
     firstname: req.body.firstname,
-    lastname: req.body.lastname,
     userlogin: req.body.userlogin,
     termsPasswordCheck: req.body.termsPasswordCheck,
     recordDate: Date.now()
