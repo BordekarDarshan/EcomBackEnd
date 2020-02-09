@@ -7,17 +7,17 @@ let router = express.Router();
 
 router.post("/login", async (req, res) => {
   let afterEntryEmail = await urm.uRegisModel.findOne({
-    "userlogin.emailId": req.body.userlogin.emailId
+    "userlogin.emailId": req.body.userloginSignIn.emailIdSignIn
   });
   if (!afterEntryEmail) {
-    res.status(402).send("Invalid EmailId");
+    res.send({ Message: "Invalid EmailId" });
   }
   let passMatch = await bcrypt.compare(
-    req.body.userlogin.password,
+    req.body.userloginSignIn.passwordSignIn,
     afterEntryEmail.userlogin.password
   );
   if (!passMatch) {
-    return res.status(402).send("Invalid Password");
+    return res.send({ Message: "Invalid Password" });
   }
   let token = afterEntryEmail.tokenValidation();
 
