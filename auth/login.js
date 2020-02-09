@@ -6,10 +6,6 @@ let joi = require("@hapi/joi");
 let router = express.Router();
 
 router.post("/login", async (req, res) => {
-  let checkValidaton = loginValidation(req.body);
-  if (!checkValidaton) {
-    res.status(402).send("Invalid entry..... Check Email and Password again");
-  }
   let afterEntryEmail = await urm.uRegisModel.findOne({
     "userlogin.emailId": req.body.userlogin.emailId
   });
@@ -27,15 +23,5 @@ router.post("/login", async (req, res) => {
 
   res.header("secure-token", token).send({ Message: "Login Successful" });
 });
-
-function loginValidation(reqbody) {
-  let schema = joi.object().keys({
-    userlogin: {
-      emailId: joi.string().required(),
-      password: joi.string().required()
-    }
-  });
-  return joi.validate(reqbody, schema);
-}
 
 module.exports = router;
