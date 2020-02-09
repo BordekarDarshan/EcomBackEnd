@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const morgan = require("morgan");
 const config = require("config");
 const mongoose = require("mongoose");
@@ -34,7 +35,7 @@ mongoose
   .catch(() => {
     console.log("Connection Unsccessful....Terminating...");
   });
-
+app.use(cors());
 app.use(express.json());
 app.use("uploads", express.static("uploads"));
 app.use(morgan("tiny"));
