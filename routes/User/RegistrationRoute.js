@@ -6,16 +6,12 @@ let auth = require("../../middleware/authorization");
 let admin = require("../../middleware/admin");
 
 router.post("/newuser", async (req, res) => {
-  let { error } = urm.uRegisvalidation(req.body);
-  if (error) {
-    res.status(402).send(error.details[0].message);
-  }
   let useremail = await urm.uRegisModel.findOne({
     "userlogin.emailId": req.body.userlogin.emailId
   });
 
   if (useremail) {
-    return res.status(402).send("Email already exist!!!");
+    res.send({ Message: "Email already exist!!!" });
   }
   let newUser = await new urm.uRegisModel({
     firstname: req.body.firstname,
@@ -25,9 +21,9 @@ router.post("/newuser", async (req, res) => {
   });
 
   if (!newUser.termsPasswordCheck) {
-    return res
-      .status(402)
-      .send("Please Accept Our Policy... Otherwise you cannot proceed further");
+    res.send({
+      Message: "Please Accept Our Policy... Otherwise you cannot proceed further"
+    });
   }
   let salt = await bcrypt.genSalt(10);
   newUser.userlogin.password = await bcrypt.hash(
@@ -36,6 +32,7 @@ router.post("/newuser", async (req, res) => {
   );
 
   let saveData = await newUser.save();
+
   res.send({ Message: "registered successfully" });
 });
 

@@ -29,33 +29,4 @@ uRegisSchema.methods.tokenValidation = function() {
 //Model
 let uRegisModel = mongoose.model("UserRegistration", uRegisSchema);
 
-//Validation
-function uRegisvalidation(reqbody) {
-  let schema = joi.object().keys({
-    firstname: joi
-      .string()
-      .min(3)
-      .max(20)
-      .required(),
-    userlogin: {
-      emailId: joi
-        .string()
-        .required()
-        .email({ minDomainSegments: 2 }),
-      password: joi
-        .string()
-        .required()
-        .min(3)
-        .max(20),
-      confirmPass: joi
-        .any()
-        .valid(joi.ref("password"))
-        .required()
-        .options({ language: { any: { allowOnly: "must match password" } } })
-    },
-    termsPasswordCheck: joi.boolean().required()
-  });
-  return joi.validate(reqbody, schema);
-}
-
-module.exports = { uRegisSchema, uRegisModel, uRegisvalidation, uRegisSchema }; //Exporting For Future Use In Other Files
+module.exports = { uRegisSchema, uRegisModel, uRegisSchema }; //Exporting For Future Use In Other Files
