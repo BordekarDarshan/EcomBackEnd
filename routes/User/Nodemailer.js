@@ -37,7 +37,7 @@ router.post("/mail", async (req, res) => {
 
   let mailOptions = {
     from: '"Electro Store: " <bordekardarshan@gmail.com>', // sender address
-    to: currentUser.userlogin.emailId, // list of receivers
+    to: currentUser.userlogin.emailId, // list of receivers end
     subject: "Reset Your Password", // Subject line
     text:
       "open this link to change your password http://localhost:4200/forgotpassword/" +
