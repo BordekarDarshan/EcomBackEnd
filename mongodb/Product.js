@@ -4,7 +4,7 @@ let Joi = require("@hapi/joi");
 //Product Database.
 
 let productSchema = new mongoose.Schema({
-  pName: { type: String, minlength: 2, maxlength: 30 },
+  pName: { type: String, minlength: 2, maxlength: 300 },
   price: { type: Number, minlength: 1 },
   category: { type: String },
   subcategory: { type: String },
@@ -12,7 +12,7 @@ let productSchema = new mongoose.Schema({
   updateDate: { type: Date },
   isadmin: { type: Boolean },
   image: { type: String, required: true },
-  description: { type: String, minlength: 2, maxlength: 50 },
+  description: { type: String, minlength: 2, maxlength: 5000 },
   offerPrice: { type: Number },
   isAvailable: { type: Boolean },
   isTodayOffer: { type: Boolean }
