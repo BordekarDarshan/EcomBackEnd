@@ -1,7 +1,38 @@
 let express = require("express");
 let router = express.Router();
 let pm = require("../../mongodb/Product"); // Product Model.
+let multer = require("multer");
 
+let imgport = "http://localhost:4000";
+
+let storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, "./uploads/");
+  },
+  filename: function(req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  if (
+    file.mimetype === "image/jpg" ||
+    file.mimetype === "image/jpeg" ||
+    file.mimetype === "image/png"
+  ) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+let upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5
+  },
+  fileFilter: fileFilter
+});
 /*-----------------------------------------------SUBCATEGORY------------------------------------------------------*/
 
 // To add New Subcategory.
@@ -116,7 +147,7 @@ router.put("/ucatsubcategory/:id", async (req, res) => {
 
 //To add New Product.
 
-router.post("/product", async (req, res) => {
+router.post("/product", upload.single("image"), async (req, res) => {
   let { error } = pm.uProductValidation(req.body);
   if (error) {
     res.status(402).send(error.details[0].message);
@@ -127,6 +158,7 @@ router.post("/product", async (req, res) => {
     category: req.body.category,
     subcategory: req.body.subcategory,
     recordDate: Date.now(),
+    image: imgport + "/uploads/" + req.file.filename,
     isTodayOffer: req.body.isTodayOffer,
     offerPrice: req.body.offerPrice,
     isAvailable: req.body.isAvailable,
@@ -138,16 +170,17 @@ router.post("/product", async (req, res) => {
 
 //Update Product.
 
-router.put("/uproduct/:id", async (req, res) => {
+router.put("/uproduct/:id", upload.single("image"), async (req, res) => {
   let upro = await pm.productModel.findByIdAndUpdate(req.params.id);
   (upro.pName = req.body.pName),
     (upro.price = req.body.price),
     (upro.category = req.body.category),
     (upro.subcategory = req.body.subcategory),
+    (upro.image = imgport + "/uploads/" + req.file.filename),
     (upro.updateDate = Date.now());
 
   let prosave = await upro.save();
-  res.send({ message: "updated" });
+  res.send({ Message: "updated", Data: prosave });
 });
 
 //Delete product By _id.

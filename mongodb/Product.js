@@ -11,7 +11,7 @@ let productSchema = new mongoose.Schema({
   recordDate: { type: Date },
   updateDate: { type: Date },
   isadmin: { type: Boolean },
-  //image: { type: String, required: true },
+  image: { type: String, required: true },
   description: { type: String, minlength: 2, maxlength: 50 },
   offerPrice: { type: Number },
   isAvailable: { type: Boolean },
