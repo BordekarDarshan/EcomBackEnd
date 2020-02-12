@@ -178,6 +178,9 @@ router.put("/uproduct/:id", upload.single("image"), async (req, res) => {
     (upro.subcategory = req.body.subcategory),
     (upro.image = imgport + "/uploads/" + req.file.filename),
     (upro.description = req.body.description),
+    (upro.offerPrice = req.body.offerPrice),
+    (upro.isTodayOffer = req.body.isTodayOffer),
+    (upro.isAvailable = req.body.isAvailable),
     (upro.updateDate = Date.now());
 
   let prosave = await upro.save();
