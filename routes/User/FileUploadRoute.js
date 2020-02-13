@@ -7,7 +7,7 @@ let imgport = "http://localhost:4000";
 
 let storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null, "./uploads");
+    cb(null, "./uploads/");
   },
   filename: function(req, file, cb) {
     cb(null, Date.now() + file.originalname);
@@ -34,7 +34,7 @@ let upload = multer({
 
 router.post("/fileupload", upload.single("image"), async (req, res) => {
   let file = new fm.fileModel({
-    image: imgport + "/uploads" + req.file.filename
+    image: imgport + "/uploads/" + req.file.filename
   });
   if (!file) {
     return res.status(402).send("File not found !!!");
