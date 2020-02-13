@@ -10,7 +10,7 @@ let storage = multer.diskStorage({
     cb(null, "./uploads/");
   },
   filename: function(req, file, cb) {
-    cb(null, Date.now() + file.originalname);
+    cb(null, file.originalname);
   }
 });
 const fileFilter = (req, file, cb) => {
@@ -43,6 +43,13 @@ router.post("/fileupload", upload.single("image"), async (req, res) => {
   res.send({
     Message: "File Uploaded",
     File: data
+  });
+});
+router.get("/getFile", async (req, res) => {
+  let getdata = await fm.fileModel.find();
+  res.send({
+    Message: "File Uploaded",
+    File: getdata
   });
 });
 module.exports = router;
