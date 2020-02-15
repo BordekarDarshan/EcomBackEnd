@@ -7,19 +7,17 @@ let auth = require("../../middleware/authorization");
 
 //Cart for Products with OG Price
 router.post("/cart", async (req, res) => {
-  let product = await prom.productModel.findById(req.body.productid);
-
   let newcart = await new cm.cartmodel({
     productid: req.body.productid,
-    pName: product.pName,
-    price: product.price,
+    pName: req.body.pName,
+    price: req.body.price,
     quantity: req.body.quantity,
-    totalPrice: product.price * req.body.quantity,
+    totalPrice: req.body.totalPrice,
     recordDate: Date.now()
   });
-  let pSave = await newcart.save();
+  let cartSave = await newcart.save();
 
-  res.send({ Message: "Saved", Data: pSave });
+  res.send({ Message: "Saved", Data: cartSave });
 });
 
 //Cart Associated With User(Email)
