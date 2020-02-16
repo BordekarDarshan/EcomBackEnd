@@ -47,6 +47,16 @@ router.get("/ParticularProduct/:id", async (req, res) => {
   res.send({ Message: "Fetch Successfully", Data: getData });
 });
 
+router.get("/OneProduct/:id", async (req, res) => {
+  let getData = await product.productModel.find({ _id: req.params.id });
+
+  if (!getData) {
+    return res.status(503).send({ Message: "Server Temporarily Available" });
+  }
+
+  res.send({ Data: getData });
+});
+
 // Fetch all Latest Products.
 
 router.get("/product/latestproduct", async (req, res) => {
