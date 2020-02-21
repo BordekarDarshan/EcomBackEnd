@@ -22,7 +22,8 @@ router.post("/newuser", async (req, res) => {
 
   if (!newUser.termsPasswordCheck) {
     res.send({
-      Message: "Please Accept Our Policy... Otherwise you cannot proceed further"
+      Message:
+        "Please Accept Our Policy... Otherwise you cannot proceed further"
     });
   }
   let salt = await bcrypt.genSalt(10);
@@ -33,7 +34,7 @@ router.post("/newuser", async (req, res) => {
 
   let saveData = await newUser.save();
 
-  res.send({ Message: "registered successfully" });
+  res.send({ Message: "registered successfully", Data: saveData });
 });
 
 router.delete("/removeu/:id", [auth, admin], async (req, res) => {
