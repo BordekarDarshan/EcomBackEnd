@@ -21,7 +21,18 @@ router.post("/login", async (req, res) => {
   }
   let token = afterEntryEmail.tokenValidation();
 
-  res.header("secure-token", token).send({ Message: "Login Successful" });
+  res
+    .header("secure-token", token)
+    .send({ Message: "Login Successful", Token: token, Data: afterEntryEmail });
+});
+
+router.get("/currentUser", async (req, res) => {
+  try {
+    let current = await urm.uRegisModel.findById(req.UserRegistration._id);
+    res.send(current);
+  } catch (error) {
+    res.send(ex.message);
+  }
 });
 
 module.exports = router;
