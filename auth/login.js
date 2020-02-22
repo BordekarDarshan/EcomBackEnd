@@ -10,14 +10,14 @@ router.post("/login", async (req, res) => {
     "userlogin.emailId": req.body.userloginSignIn.emailIdSignIn
   });
   if (!afterEntryEmail) {
-    res.send({ Message: "Invalid EmailId" });
+    res.status(400).send({ Message: "Invalid EmailId" });
   }
   let passMatch = await bcrypt.compare(
     req.body.userloginSignIn.passwordSignIn,
     afterEntryEmail.userlogin.password
   );
   if (!passMatch) {
-    return res.send({ Message: "Invalid Password" });
+    return res.status(400).send({ Message: "Invalid Password" });
   }
   let token = afterEntryEmail.tokenValidation();
 
