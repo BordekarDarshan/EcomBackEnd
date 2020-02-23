@@ -2,7 +2,7 @@ let express = require("express");
 let bcrypt = require("bcryptjs");
 let jwt = require("jsonwebtoken");
 let urm = require("../mongodb/UserRegistration");
-let joi = require("@hapi/joi");
+let auth = require("../middleware/authorization");
 let router = express.Router();
 
 router.post("/login", async (req, res) => {
@@ -21,12 +21,16 @@ router.post("/login", async (req, res) => {
   }
   let token = afterEntryEmail.tokenValidation();
 
-  res
+  res0
     .header("secure-token", token)
     .send({ Message: "Login Successful", Token: token, Data: afterEntryEmail });
 });
 
-router.get("/currentUser", async (req, res) => {
+//API For Current Logged-in User.
+//req.UserRegistration = Decoded Token.
+//req.UserRegistration._id = Will Fetch "id" of login user Data in that Token.
+
+router.get("/currentUser", auth, async (req, res) => {
   try {
     let current = await urm.uRegisModel.findById(req.UserRegistration._id);
     res.send(current);
