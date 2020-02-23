@@ -21,7 +21,7 @@ router.post("/login", async (req, res) => {
   }
   let token = afterEntryEmail.tokenValidation();
 
-  res0
+  res
     .header("secure-token", token)
     .send({ Message: "Login Successful", Token: token, Data: afterEntryEmail });
 });
