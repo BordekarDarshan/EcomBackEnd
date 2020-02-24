@@ -16,7 +16,10 @@ router.post("/cartbyuser", async (req, res) => {
 
 //Fetch Latest Cart Data Of concern User.
 router.get("/fetchCartByUser", async (req, res) => {
-  let FetchData = await cm.userCartModel.find().sort("-recordDate");
+  let FetchData = await cm.userCartModel
+    .find()
+    .sort("-recordDate")
+    .limit(1);
 
   res.send({ Message: "Cart Data Fetch Successfully", Data: FetchData });
 });
