@@ -21,25 +21,14 @@ router.post("/cart", async (req, res) => {
 });
 
 //Cart Associated With User(Email)
-router.post("/cartbyuser", auth, async (req, res) => {
-  let getEmail = await urm.uRegisModel
-    .findById(req.UserRegistration._id)
-    .select("userlogin.emailId");
-
-  if (!getEmail) {
-    return res.status(402).send("Email Not Found!!! Register Or Login First");
-  }
-  let product = await cm.cartmodel
-    .find()
-    .select(["pName", "price", "quantity"]);
-
+router.post("/cartbyuser", async (req, res) => {
   let uCart = await new cm.userCartModel({
-    emailId: getEmail.userlogin.emailId,
-    cartItem: product
+    emailId: req.body.emailId,
+    cartItem: req.body.cartItem
   });
   let datasave = await uCart.save();
 
-  res.send({ Message: "Products added", Data: datasave });
+  res.send({ Message: "Products added To Respective Email", Data: datasave });
 });
 
 module.exports = router;

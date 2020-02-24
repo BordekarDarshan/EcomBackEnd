@@ -16,8 +16,7 @@ let cartschema = new mongoose.Schema({
 let cartmodel = mongoose.model("cart", cartschema);
 
 let userCartSchema = new mongoose.Schema({
-  emailId: { type: String },
-  cartItem: [cartschema]
+  emailId: { type: String }
 });
 
 let userCartModel = mongoose.model("usercart", userCartSchema);
