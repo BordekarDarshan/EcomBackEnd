@@ -11,7 +11,7 @@ router.post("/newuser", async (req, res) => {
   });
 
   if (useremail) {
-    return res.send({ Message: "Email already exist!!!" });
+    return res.status(403).send({ Message: "Email already exist!!!" });
   }
   let newUser = await new urm.uRegisModel({
     firstname: req.body.firstname,
@@ -19,9 +19,9 @@ router.post("/newuser", async (req, res) => {
     termsPasswordCheck: req.body.termsPasswordCheck,
     recordDate: Date.now()
   });
-
+  console.log(newUser.termsPasswordCheck);
   if (!newUser.termsPasswordCheck) {
-    return res.send({
+    return res.status(403).send({
       Message:
         "Please Accept Our Policy... Otherwise you cannot proceed further!!!"
     });
