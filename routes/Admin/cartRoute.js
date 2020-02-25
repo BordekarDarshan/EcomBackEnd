@@ -15,13 +15,15 @@ router.post("/cartbyuser", async (req, res) => {
 });
 
 //Fetch Latest Cart Data Of concern User.
-router.get("/fetchCartByUser", async (req, res) => {
-  let FetchData = await cm.userCartModel
-    .find()
+router.get("/fetchCartByUser/UserCart/:emailId", async (req, res) => {
+  let findEmail = await cm.userCartModel
+    .findOne({ emailId: req.params.emailId })
     .sort("-recordDate")
     .limit(1);
 
-  res.send({ Message: "Cart Data Fetch Successfully", Data: FetchData });
+  if (findEmail) {
+    res.send({ Message: "Cart Data Fetch Successfully", Data: findEmail });
+  }
 });
 
 module.exports = router;
