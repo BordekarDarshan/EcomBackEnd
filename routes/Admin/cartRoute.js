@@ -20,9 +20,10 @@ router.get("/fetchCartByUser/UserCart/:emailId", async (req, res) => {
     .findOne({ emailId: req.params.emailId })
     .sort("-recordDate")
     .limit(1);
+  console.log(findEmail);
 
   if (findEmail) {
-    res.send({ Message: "Cart Data Fetch Successfully", Data: findEmail });
+    res.send({ loading: false, userCartData: findEmail.cartItem, error: "" });
   }
 });
 
