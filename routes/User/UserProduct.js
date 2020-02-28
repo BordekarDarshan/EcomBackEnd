@@ -38,7 +38,7 @@ router.get("/allproducts", async (req, res) => {
 // Fetch Product By Id. [Specific Product]
 
 router.get("/ParticularProduct/:id", async (req, res) => {
-  let getData = await product.productModel.find({ _id: req.params.id });
+  let getData = await product.productModel.findById({ _id: req.params.id });
 
   if (!getData) {
     return res.status(503).send({ Message: "Server Temporarily Available" });
