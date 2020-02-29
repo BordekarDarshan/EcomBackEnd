@@ -23,7 +23,7 @@ router.get("/fetchCartByUser/UserCart/:emailId", async (req, res) => {
   console.log(findEmail);
 
   if (findEmail) {
-    res.send({ loading: false, userCartData: findEmail.cartItem, error: "" });
+    res.send({ userCartData: findEmail.cartItem });
   }
 });
 
