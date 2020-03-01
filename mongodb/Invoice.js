@@ -9,7 +9,8 @@ let invoiceSchema = new mongoose.Schema({
   city: { type: String, required: true },
   StateName: { type: String, required: true },
   summary: { type: Array },
-  payment: { type: String }
+  payment: { type: String },
+  recordDate: { type: Date }
 });
 
 let invoiceModel = mongoose.model("invoice", invoiceSchema);

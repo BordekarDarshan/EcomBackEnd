@@ -20,9 +20,12 @@ router.post("/sendInvoiceData", async (req, res) => {
   res.send({ Message: "Data Added Successfully", Data: saveData });
 });
 router.get("/getInvoiceData/:email", async (req, res) => {
-  let getData = await invoiceDB.invoiceModel.findOne({
-    email: req.params.email
-  });
+  let getData = await invoiceDB.invoiceModel
+    .findOne({
+      email: req.params.email
+    })
+    .sort("-recordDate")
+    .limit(1);
   res.send({ Message: "Data Fetch Successfully", Data: getData });
 });
 
