@@ -41,9 +41,9 @@ router.delete("/deleteCart/:emailId", async (req, res) => {
   res.send({ Message: "Deleted" });
 });
 
-router.delete("/deleteInvoice/:emailId", async (req, res) => {
+router.delete("/deleteInvoice/:email", async (req, res) => {
   let getInvoice = await invoiceDB.invoiceModel.deleteMany({
-    emailId: req.params.emailId
+    email: req.params.email
   });
   res.send({ Message: "Deleted" });
 });
