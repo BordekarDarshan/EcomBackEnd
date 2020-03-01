@@ -16,6 +16,7 @@ const cart = require("./routes/Admin/CartRoute");
 const fileUpload = require("./routes/User/FileUploadRoute");
 const productOperation = require("./routes/Admin/ProductRoute");
 const userProduct = require("./routes/User/UserProduct");
+const invoice = require("./routes/User/invoiceRoute");
 
 //First Ask for Private Key
 if (!config.get("jwtprivatekey")) {
@@ -50,6 +51,7 @@ app.use("/api", cart);
 app.use("/api", fileUpload);
 app.use("/api", productOperation);
 app.use("/api", userProduct);
+app.use("/api", invoice);
 app.listen(port, () => {
   console.log("Server is working on port" + port);
 });
