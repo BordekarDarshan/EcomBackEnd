@@ -40,3 +40,10 @@ router.delete("/deleteCart/:emailId", async (req, res) => {
   });
   res.send({ Message: "Deleted" });
 });
+
+router.delete("/deleteInvoice/:emailId", async (req, res) => {
+  let getInvoice = await invoiceDB.invoiceModel.deleteMany({
+    emailId: req.params.emailId
+  });
+  res.send({ Message: "Deleted" });
+});
