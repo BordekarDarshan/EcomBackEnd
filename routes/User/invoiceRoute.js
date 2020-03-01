@@ -1,6 +1,7 @@
 let express = require("express");
 let router = express.Router();
 let invoiceDB = require("../../mongodb/Invoice");
+let cartDB = require("../../mongodb/UserCart");
 
 router.post("/sendInvoiceData", async (req, res) => {
   let date = new Date();
@@ -14,7 +15,7 @@ router.post("/sendInvoiceData", async (req, res) => {
     StateName: req.body.StateName,
     summary: req.body.summary,
     payment: req.body.payment,
-    recordDate: date.getDate().toLocaleString()
+    recordDate: date.getDate().toString(5)
   });
   let saveData = await addData.save();
   res.send({ Message: "Data Added Successfully", Data: saveData });
@@ -30,3 +31,12 @@ router.get("/getInvoiceData/:email", async (req, res) => {
 });
 
 module.exports = router;
+
+//Delete Cart And Invoice Data As soon as user Clicks On Confirm Order button.
+
+router.delete("/deleteCart/:emailId", async (req, res) => {
+  let getCart = await cartDB.userCartModel.deleteMany({
+    emailId: req.params.emailId
+  });
+  res.send({ Message: "Deleted" });
+});
