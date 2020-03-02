@@ -4,7 +4,6 @@ let invoiceDB = require("../../mongodb/Invoice");
 let cartDB = require("../../mongodb/UserCart");
 
 router.post("/sendInvoiceData", async (req, res) => {
-  let date = new Date();
   let addData = await new invoiceDB.invoiceModel({
     email: req.body.email,
     name: req.body.name,
@@ -15,7 +14,7 @@ router.post("/sendInvoiceData", async (req, res) => {
     StateName: req.body.StateName,
     summary: req.body.summary,
     payment: req.body.payment,
-    recordDate: date.getDate().toString(5)
+    recordDate: Date.now()
   });
   let saveData = await addData.save();
   res.send({ Message: "Data Added Successfully", Data: saveData });
