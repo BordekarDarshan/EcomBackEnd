@@ -24,7 +24,7 @@ router.post("/mail", async (req, res) => {
     secure: true,
     auth: {
       user: "bordekardarshan@gmail.com",
-      pass: "XXXXXXXXX"
+      pass: "PASHABiceps@4.0"
     },
     tls: { rejectUnauthorized: false },
     debug: true
@@ -36,11 +36,11 @@ router.post("/mail", async (req, res) => {
     });
 
   let mailOptions = {
-    from: '"Electro Store: " <bordekardarshan@gmail.com>', // sender address
+    from: '"Souled Out: " <bordekardarshan@gmail.com>', // sender address
     to: currentUser.userlogin.emailId, // list of receivers end
     subject: "Reset Your Password", // Subject line
     text:
-      "open this link to change your password http://localhost:4200/forgotpassword/" +
+      "open this link to change your password http://localhost:4000/forgotpassword/" +
       resetToken // plain text body
   };
 
