@@ -52,7 +52,7 @@ router.post("/mail", async (req, res) => {
     console.log("Message sent: %s", info.messageId);
   });
 
-  res.send({ message: "please check your mail box" });
+  res.send({ message: "please check your mail box", Data: currentUser });
 });
 
 module.exports = router;
