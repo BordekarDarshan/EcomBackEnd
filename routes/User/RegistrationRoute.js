@@ -37,6 +37,14 @@ router.post("/newuser", async (req, res) => {
   res.send({ Message: "Registered successfully", Data: saveData });
 });
 
+router.get("/OneUserData/:email", async (req, res) => {
+  let getData = await urm.uRegisModel.findOne({
+    "userlogin.emailId": req.params.email
+  });
+
+  res.send({ Message: "Data Fetch Successfully", Data: getData });
+});
+
 router.delete("/removeu/:id", [auth, admin], async (req, res) => {
   let data = await urm.uRegisModel.findByIdAndRemove(req.params.id);
   if (!data) {
