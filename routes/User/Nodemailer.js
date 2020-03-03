@@ -5,6 +5,8 @@ let router = express.Router();
 let crypto = require("crypto");
 
 router.post("/mail", async (req, res) => {
+  try {
+  } catch (error) {}
   let resetToken = crypto.randomBytes(32).toString("hex");
 
   let currentUser = await urm.uRegisModel.findOne({
@@ -40,7 +42,7 @@ router.post("/mail", async (req, res) => {
     to: currentUser.userlogin.emailId, // list of receivers end
     subject: "Reset Your Password", // Subject line
     text:
-      "open this link to change your password http://localhost:4000/forgotpassword/" +
+      "open this link to change your password http://localhost:4000/api/reset/" +
       resetToken // plain text body
   };
 
