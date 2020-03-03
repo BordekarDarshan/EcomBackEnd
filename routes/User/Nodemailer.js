@@ -5,9 +5,8 @@ let router = express.Router();
 let crypto = require("crypto");
 
 router.post("/mail", async (req, res) => {
-  try {
-  } catch (error) {}
   let resetToken = crypto.randomBytes(32).toString("hex");
+  console.log(resetToken);
 
   let currentUser = await urm.uRegisModel.findOne({
     "userlogin.emailId": req.body.userlogin.emailId
@@ -41,9 +40,7 @@ router.post("/mail", async (req, res) => {
     from: '"Souled Out: " <bordekardarshan@gmail.com>', // sender address
     to: currentUser.userlogin.emailId, // list of receivers end
     subject: "Reset Your Password", // Subject line
-    text:
-      "open this link to change your password http://localhost:4000/api/reset/" +
-      resetToken // plain text body
+    text: "open this link to change your password http://localhost:3000/reset"
   };
 
   // send mail with defined transport object
@@ -54,7 +51,7 @@ router.post("/mail", async (req, res) => {
     console.log("Message sent: %s", info.messageId);
   });
 
-  res.send({ message: "please check your mail box", Data: currentUser });
+  res.send({ message: "please check your mail box" });
 });
 
 module.exports = router;
