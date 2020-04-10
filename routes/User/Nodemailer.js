@@ -9,7 +9,7 @@ router.post("/mail", async (req, res) => {
   console.log(resetToken);
 
   let currentUser = await urm.uRegisModel.findOne({
-    "userlogin.emailId": req.body.userlogin.emailId
+    "userlogin.emailId": req.body.userlogin.emailId,
   });
 
   if (!currentUser) {
@@ -25,22 +25,22 @@ router.post("/mail", async (req, res) => {
     secure: true,
     auth: {
       user: "bordekardarshan@gmail.com",
-      pass: "PASHABiceps@4.0"
+      pass: "*********",
     },
     tls: { rejectUnauthorized: false },
-    debug: true
+    debug: true,
   });
 
   if (!transporter)
     res.status(401).send({
-      message: "something went wrong"
+      message: "something went wrong",
     });
 
   let mailOptions = {
     from: '"Souled Out: " <bordekardarshan@gmail.com>', // sender address
     to: currentUser.userlogin.emailId, // list of receivers end
     subject: "Reset Your Password", // Subject line
-    text: "open this link to change your password http://localhost:3000/reset"
+    text: "open this link to change your password http://localhost:3000/reset",
   };
 
   // send mail with defined transport object
